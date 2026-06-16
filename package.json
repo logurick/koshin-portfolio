@@ -1,0 +1,13 @@
+{
+  "name": "koshin-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "向心クラブ公式ホームページ",
+  "scripts": {
+    "build": "node scripts/build-site.js",
+    "dev": "node scripts/build-site.js --watch"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
