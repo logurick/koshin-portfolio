@@ -10,6 +10,17 @@
 - 画像が少ない状態でも見栄えが崩れにくい、CSSベースのヒーロービジュアル
 - スマートフォンでも横スクロールしにくいレスポンシブ対応
 
+## テスト公開と検索エンジン対策
+
+この GitHub Pages はテスト公開用です。
+
+ビルド時に次の検索エンジン対策を自動で出力します。
+
+- 全HTMLに `noindex,nofollow,noarchive,noimageindex` の robots meta を追加
+- `dist/robots.txt` に `User-agent: *` と `Disallow: /` を出力
+
+完全なアクセス制限ではないため、URLを知っている人はページを閲覧できます。正式公開時は `scripts/build-site.js` の robots meta と `writeRobotsTxt()` の内容を見直してください。
+
 ## ページ構成
 
 | セクション | 内容 |
