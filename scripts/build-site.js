@@ -193,6 +193,8 @@ function layout({ title, description, body, pageClass = "", basePath = "" }) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${escapeHtml(fullTitle)}</title>
   <meta name="description" content="${escapeHtml(description || site.description)}">
+  <meta name="robots" content="noindex,nofollow,noarchive,noimageindex">
+  <meta name="googlebot" content="noindex,nofollow,noarchive,noimageindex">
   <meta property="og:title" content="${escapeHtml(fullTitle)}">
   <meta property="og:description" content="${escapeHtml(description || site.description)}">
   <meta property="og:type" content="website">
@@ -450,11 +452,24 @@ function copyAssets() {
   }
 }
 
+function writeRobotsTxt() {
+  const robots = [
+    "User-agent: *",
+    "Disallow: /",
+    "",
+    "# This GitHub Pages site is for testing only.",
+    "# HTML pages also include noindex/nofollow meta tags."
+  ].join("\n");
+
+  fs.writeFileSync(path.join(distDir, "robots.txt"), `${robots}\n`, "utf8");
+}
+
 function build() {
   const articles = getArticles();
   emptyDir(distDir);
   copyAssets();
   fs.writeFileSync(path.join(distDir, ".nojekyll"), "", "utf8");
+  writeRobotsTxt();
   fs.writeFileSync(path.join(distDir, "index.html"), homePage(articles), "utf8");
 
   for (const article of articles) {
